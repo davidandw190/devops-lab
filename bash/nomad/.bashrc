@@ -10,8 +10,28 @@ source <(kubectl completion bash)
 # Path to Docker completion script
 source /etc/bash_completion.d/docker
 
+
 # kubectl aliases
 alias k='kubectl'
+alias kg='kubectl get'
+alias kd='kubectl describe'
+alias kc='kubectl create'
+alias ke='kubectl edit'
+alias kdelf='kubectl delete --force --grace-period=0'
+alias kaf='kubectl apply -f'
+alias kex='kubectl exec -it'
+alias klogs='kubectl logs'
+alias kp='kubectl port-forward'
+alias ktop='kubectl top'
+
+# Docker aliases
+alias d='docker'
+alias dps='docker ps'
+alias di='docker images'
+alias dstopall='docker stop $(docker ps -a -q)'
+alias drmall='docker rm $(docker ps -a -q)'
+alias drmi='docker rmi $(docker images -q)'
+alias dpauseall='docker pause $(docker ps -q)'
 
 # Add ~/.kubectx to PATH
 export PATH=~/.kubectx:$PATH

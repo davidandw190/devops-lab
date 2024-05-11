@@ -125,24 +125,52 @@ source "$OSH"/oh-my-bash.sh
 
 ### CUSTOM CONFIGURATIONS ###
 
-# User-defined aliases
-alias bashconfig="nano ~/.bashrc"
-alias ohmybash="nano ~/.oh-my-bash"
-
 # Starship initialization
 eval "$(starship init bash)"
+
+# Path to kubectl completion script
+source <(kubectl completion bash)
+
+# Sometimes the completion script is not sourced properly
+complete -o default -F __start_kubectl k # not needed on mac
+
+# Path to Docker completion script
+source /etc/bash_completion.d/docker
 
 # NVM setup
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# kubectl setup
-alias k='kubectl'
-source <(kubectl completion bash)
 
-# Sometimes the completion script is not sourced properly
-complete -o default -F __start_kubectl k # not needed on mac
+
+# Config file aliases
+alias bashconfig="nano ~/.bashrc"
+alias ohmybash="nano ~/.oh-my-bash"
+
+# kubectl aliases
+alias k='kubectl'
+alias kg='kubectl get'
+alias kd='kubectl describe'
+alias kc='kubectl create'
+alias ke='kubectl edit'
+alias kdelf='kubectl delete --force --grace-period=0'
+alias kaf='kubectl apply -f'
+alias kex='kubectl exec -it'
+alias klogs='kubectl logs'
+alias kp='kubectl port-forward'
+alias ktop='kubectl top'
+
+# Docker aliases
+alias d='docker'
+alias dps='docker ps'
+alias di='docker images'
+alias dstopall='docker stop $(docker ps -a -q)'
+alias drmall='docker rm $(docker ps -a -q)'
+alias drmi='docker rmi $(docker images -q)'
+alias dpauseall='docker pause $(docker ps -q)'
+
+
 
 # Add ~/.kubectx to PATH
 export PATH=~/.kubectx:$PATH
