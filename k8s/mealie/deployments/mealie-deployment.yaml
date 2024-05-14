@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mealie
+  namespace: mealie
+  labels:
+    app: mealie
+    creator: "davidandw190"
+    creationTimestamp: "2024-05-14"
+    version: "v1.2.0"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mealie
+  template:
+    metadata:
+      labels:
+        app: mealie
+    spec:
+      containers:
+      - name: mealie
+        image: ghcr.io/mealie-recipes/mealie:v1.2.0
+        ports:
+        - containerPort: 9000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
